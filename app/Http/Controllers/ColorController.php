@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Car;
 use App\Models\Color;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class ColorController extends Controller
      */
     public function index()
     {
-        //
+        $colors = Color::all();
+        $cars = Car::all();
+        return view('pages.section', compact('colors', 'cars'));
     }
 
     /**
@@ -35,7 +38,10 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newEntry = new Color;
+        $newEntry->color = $request->color;
+        $newEntry->save();
+        return redirect()->back();
     }
 
     /**

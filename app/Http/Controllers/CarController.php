@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Color;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
@@ -14,7 +15,9 @@ class CarController extends Controller
      */
     public function index()
     {
-        //
+        $colors = Color::all();
+        $cars = Car::all();
+        return view('pages.allCars', compact('colors', 'cars'));
     }
 
     /**
@@ -35,7 +38,12 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newEntry = new Car;
+        $newEntry->brand = $request->brand;
+        $newEntry->year = $request->year;
+        $newEntry->color_id = $request->color_id;
+        $newEntry->save();
+        return redirect()->back();
     }
 
     /**

@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\CarController;
+use App\Http\Controllers\ColorController;
+use App\Models\Car;
+use App\Models\Color;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +18,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $colors = Color::all();
+    $cars = Car::all();
+    return view('welcome', compact('colors', 'cars'));
 });
+
+Route::resource('colors', ColorController::class);
+Route::resource('cars', CarController::class);
